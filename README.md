@@ -150,4 +150,25 @@ depending on the Python version that you use.
    But I suggest using a little `bash` scripting to make our life a bit easier:
    ```bash
    stubgen -m cv2 -o $(poetry env info --path)/lib/**/site-packages/cv2/
-   ```
+   ```  
+  
+## Some Snaps
+![image](https://user-images.githubusercontent.com/55247343/132134248-3807b2c8-c316-4c60-8a2c-edf5ddfecd73.png)
+
+![image](https://user-images.githubusercontent.com/55247343/132134285-3c7d6544-4c04-4f66-b4ff-9942a748fe8d.png)
+
+Even though we generated the `stub` file, it's far from perfect as seen on the screenshots. It shows that `imread()` returns `Any`,  
+while in reality it returns `Mat` object, but since the OpenCV Python does not have `Mat` class, it will be converted to
+`numpy.ndarray` class.
+
+To provide better experience, we can use static typing:
+```python
+import numpy as np
+import cv2
+
+image: np.ndarray = cv2.imread("Path.png")
+```
+
+But still, the experience won't improve if we did not have the proper `stub` file. The good news is, I heard that on the upcoming  
+OpenCV 5.0 , they will actually provide the `stub` file as part of the package. Until then, we'll have to bear with it.  
+**HAPPY VIMMING!**
