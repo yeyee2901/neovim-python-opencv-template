@@ -149,9 +149,5 @@ depending on the Python version that you use.
    
    But I suggest using a little `bash` scripting to make our life a bit easier:
    ```bash
-   stubgen -m cv2 -o $(poetry env info --path)/lib/python3.9/site-packages/cv2/
-   
-   # Substitute <python_version> with the actual Python version you use, 
-   # the directory match the major.minor semantic versioning.
-   stubgen -m cv2 -o $(poetry env info --path)/lib/<python_version>/site-packages/cv2/
+   stubgen -m cv2 -o $(poetry env info --path)/lib/**/site-packages/cv2/
    ```
